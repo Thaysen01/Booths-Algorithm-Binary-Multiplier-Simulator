@@ -37,6 +37,8 @@ string findTwosComplement(string str) {
             break;
 
     // If there exists no '1' concatenate 1 at the starting of string
+    // This could be wrong! I think the 2s complement of 0 may be 0.
+    // TODO: Test the above assumption.
     if (i == -1)
         return '1' + str;
 

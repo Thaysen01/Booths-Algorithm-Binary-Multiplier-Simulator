@@ -41,7 +41,7 @@ string subtractBinary(string a, string b);
  * The accumulator and E are initialized to 0. Then, for the number of bits in the numbers,
  * the least significant bit of the multiplier and the E are are viewed. If Q[LSB]E is 00 or
  * 11, an arithmetic right shift through AcQE is performed. If Q[LSB]E is 01, the multiplicand
- * is added to Ac, then an arithmetic right shift through AcQE is performed.If Q[LSB]E is 10,
+ * is added to Ac, then an arithmetic right shift through AcQE is performed. If Q[LSB]E is 10,
  * the 2s complement of the multiplier is added to Ac, then an arithmetic right shift through 
  * AcQE is performed.
  * 
