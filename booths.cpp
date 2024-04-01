@@ -57,7 +57,7 @@ string subtractBinary(string a, string b) {
     return addBinary(a, twoComplement);
 }
 
-void boothsAlgorithm(string multiplicand, string multiplier) {
+string boothsAlgorithm(string multiplicand, string multiplier) {
     int n = multiplicand.length();
     string Ac(n, '0');
     char E = '0';
@@ -83,5 +83,9 @@ void boothsAlgorithm(string multiplicand, string multiplier) {
         Ac = Ac.front() + Ac;
     }
 
+    string result = Ac + multiplier;
+
     cout << "Product: " << Ac << multiplier << endl;
+
+    return result;
 }

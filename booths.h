@@ -45,4 +45,4 @@ string subtractBinary(string a, string b);
  * 
  * @return A string containing the binary result of multiplying the multiplicand by the multiplier.
 */
-void boothsAlgorithm(string multiplicand, string multiplier);
+string boothsAlgorithm(string multiplicand, string multiplier);
