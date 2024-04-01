@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <chrono>
 
 using namespace std;
 
@@ -59,8 +60,13 @@ string subtractBinary(string a, string b) {
 
 string boothsAlgorithm(string multiplicand, string multiplier) {
     int n = multiplicand.length();
-    string Ac(n, '0');
-    char E = '0';
+    string Ac(n, '0'); // simulation of accumulator
+    char E = '0'; // extended bit for Q
+    
+    int numSub = 0;
+    int numAdd = 0;
+
+    const auto start{chrono::steady_clock::now()};
 
     /**
      * for group of 2s booth:
@@ -71,8 +77,10 @@ string boothsAlgorithm(string multiplicand, string multiplier) {
     for (int i = 0; i < n; i++) {
         if (multiplier.back() == '1' && E == '0') {
             Ac = subtractBinary(Ac, multiplicand);
+            numSub++;
         } else if (multiplier.back() == '0' && E == '1') {
             Ac = addBinary(Ac, multiplicand);
+            numAdd++;
         }
 
         // Arithmetic Right Shift AcQE
@@ -85,7 +93,16 @@ string boothsAlgorithm(string multiplicand, string multiplier) {
 
     string result = Ac + multiplier;
 
-    cout << "Product: " << Ac << multiplier << endl;
+    const auto end{chrono::steady_clock::now()};
+    const chrono::duration<double> elapsed_seconds{end - start};
+
+    /*cout << "TOTAL CALCULATION TIME (MICROSECONDS): " << (elapsed_seconds.count())*1000000 << endl;
+    cout << "TOTAL ITERATIONS: " << n << endl;
+    cout << "TOTAL ADDITIONS: " << numAdd << endl;
+    cout << "TOTAL SUBTRACTIONS: " << numSub << endl;
+    cout << endl; */
+
+    cout << (elapsed_seconds.count())*1000000 << endl;
 
     return result;
 }

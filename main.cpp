@@ -18,7 +18,9 @@ int main() {
     multiplicand = string(length - multiplicand.length(), '0') + multiplicand;
     multiplier = string(length - multiplier.length(), '0') + multiplier;
 
-    boothsAlgorithm(multiplicand, multiplier);
+    string result = boothsAlgorithm(multiplicand, multiplier);
+
+    cout << "Product (in 2s complement): " << result << endl;
 
     return 0;
 }
