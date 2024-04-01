@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 #include <algorithm>
 
 using namespace std;
@@ -31,24 +30,21 @@ string findTwosComplement(string str) {
     int n = str.length();
 
     // Traverse the string to get first '1' from the last of string
+    // if no 1s, return string unmodified
     int i;
-    for (i = n-1 ; i >= 0 ; i--)
-        if (str[i] == '1')
+    for (i = n-1 ; i >= 0 ; i--) {
+        if (str[i] == '1') {
             break;
-
-    // If there exists no '1' concatenate 1 at the starting of string
-    // This could be wrong! I think the 2s complement of 0 may be 0.
-    // TODO: Test the above assumption.
-    if (i == -1)
-        return '1' + str;
-
+        }
+    }
     // Continue traversal after the position of first '1'
     for (int k = i-1 ; k >= 0; k--) {
         //Just flip the values
-        if (str[k] == '1')
+        if (str[k] == '1') {
             str[k] = '0';
-        else
+        } else {
             str[k] = '1';
+        }
     }
 
     // return the modified string

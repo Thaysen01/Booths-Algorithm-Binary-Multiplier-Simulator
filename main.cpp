@@ -1,9 +1,5 @@
 #include "booths.h"
-#include "assert.h"
-
 #include <iostream>
-#include <string>
-#include <algorithm>
 
 using namespace std;
 
