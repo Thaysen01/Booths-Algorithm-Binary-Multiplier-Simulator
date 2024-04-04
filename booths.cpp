@@ -58,6 +58,19 @@ string subtractBinary(string a, string b) {
     return addBinary(a, twoComplement);
 }
 
+string leftShift(string a) {
+    int n = a.length();
+
+    string result;
+
+    // traverse the binary string, move all elements one spot to the left
+    for (int i = 0; i < n-1; i++) {
+       result.push_back(a[i+1]);
+    }
+    result.push_back('0'); // 0 is always the additional digit in logic shifts
+    return result;
+}
+
 string boothsAlgorithm(string multiplicand, string multiplier) {
     int n = multiplicand.length();
     string Ac(n, '0'); // simulation of accumulator
@@ -96,13 +109,108 @@ string boothsAlgorithm(string multiplicand, string multiplier) {
     const auto end{chrono::steady_clock::now()};
     const chrono::duration<double> elapsed_seconds{end - start};
 
-    /*cout << "TOTAL CALCULATION TIME (MICROSECONDS): " << (elapsed_seconds.count())*1000000 << endl;
-    cout << "TOTAL ITERATIONS: " << n << endl;
-    cout << "TOTAL ADDITIONS: " << numAdd << endl;
-    cout << "TOTAL SUBTRACTIONS: " << numSub << endl;
-    cout << endl; */
+   cout << "PRODUCT: " << result << endl;
+   cout << "TOTAL CALCULATION TIME (MICROSECONDS): " << (elapsed_seconds.count())*1000000 << endl;
+   cout << "TOTAL ITERATIONS: " << n << endl;
+   cout << "TOTAL ADDITIONS: " << numAdd << endl;
+   cout << "TOTAL SUBTRACTIONS: " << numSub << endl;
+   cout << endl;
 
-    cout << (elapsed_seconds.count())*1000000 << endl;
+    return result;
+}
+
+string widenNumber(string a) {
+    string result;
+    if (a.front() == '0')
+    {
+        result.push_back('0');
+    } else {
+        result.push_back('1');
+    }
+
+    for (int i = 0; i < a.length(); i++) {
+        result.push_back(a[i]);
+    }
+    
+    return result;
+}
+
+string modifiedBoothsAlgorithm(string multiplicand, string multiplier) {
+    string wideMultiplicand = widenNumber(multiplicand);
+    int n = multiplier.length();
+    string Ac(n, '0'); // simulation of accumulator
+    char E = '0'; // extended bit for Q
+    
+    int numSub = 0;
+    int numAdd = 0;
+
+    const auto start{chrono::steady_clock::now()};
+
+   for (int i = 0; i < n; i+=2) {
+    if (multiplier[multiplier.length() - 2] == '0') {
+        /*  000 no action shift right twice
+            001 add multiplicand shift right twice
+            010 add multiplicand shift right twice
+            011 add 2*multiplicand shift right twice
+        */
+       if (multiplier.back() == '1' && E == '0') {
+        Ac = addBinary(Ac, wideMultiplicand);
+        numAdd++;
+       } else if (multiplier.back() == '0' && E == '1') {
+        Ac = addBinary(Ac, wideMultiplicand);
+        numAdd++;
+       } else if (multiplier.back() == '1' && E == '1') {
+        string multiplicand_2 = leftShift(wideMultiplicand); // left shift and one add is faster than two adds
+        Ac = addBinary(Ac, multiplicand_2);
+        numAdd ++;
+       }
+    } else {
+        /*  100 sub 2*multiplicand shift right twice
+            101 sub multiplicand shift right twice
+            110 sub multiplicand shift right twice
+            111 no action shift right twice 
+        */
+       if (multiplier.back() == '1' && E == '0') {
+        Ac = subtractBinary(Ac, wideMultiplicand);
+        numSub++;
+       } else if (multiplier.back() == '0' && E == '1') {
+        Ac = subtractBinary(Ac, wideMultiplicand);
+        numSub++;
+       } else if (multiplier.back() == '0' && E == '0') {
+        string multiplicand_2 = leftShift(wideMultiplicand); // left shift and one sub is faster than two subs
+        Ac = subtractBinary(Ac, multiplicand_2);
+        numSub ++;
+       }
+    }
+    
+        // Arithmetic Right Shift AcQE
+        E = multiplier.back(); // this is effectively unneeded, but is included to fully simulate multiple multiple rigth shifts
+        multiplier.pop_back();
+        multiplier = Ac.back() + multiplier;
+        Ac.pop_back();
+        Ac = Ac.front() + Ac;
+
+        // Arithmetic Right Shift AcQE
+        E = multiplier.back();
+        multiplier.pop_back();
+        multiplier = Ac.back() + multiplier;
+        Ac.pop_back();
+        Ac = Ac.front() + Ac;
+   }
+
+    string result = Ac + multiplier;
+
+    
+
+    const auto end{chrono::steady_clock::now()};
+    const chrono::duration<double> elapsed_seconds{end - start};
+
+   cout << "PRODUCT: " << result << endl;
+   cout << "TOTAL CALCULATION TIME (MICROSECONDS): " << (elapsed_seconds.count())*1000000 << endl;
+   cout << "TOTAL ITERATIONS: " << n << endl;
+   cout << "TOTAL ADDITIONS: " << numAdd << endl;
+   cout << "TOTAL SUBTRACTIONS: " << numSub << endl;
+   cout << endl;
 
     return result;
 }

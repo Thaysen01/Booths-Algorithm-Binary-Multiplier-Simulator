@@ -34,9 +34,28 @@ string findTwosComplement(string str);
 string subtractBinary(string a, string b);
 
 /**
+ * @brief Performs a logic shift left (doubling) on a binary number stored as a string.
+ * 
+ * The string is traversed with all characters shifted one spot to the left. The first character falls off.
+ * The new digit is always a zero.
+ * 
+ * @return A string holding the doubled value of the binary number that was passed in.
+*/
+string leftShift(string a);
+
+/**
+ * @brief Increases the number of bits in a binary number by one.
+ * 
+ *  The first digit of the number passed into the the function is duplicated and prepended to the string.
+ * 
+ * @return A binary number stored as a string that is one bit wider than what was passed in.
+*/
+string widenNumber(string a);
+
+/**
  * @brief Performs group of two Booth's algorithm on two binary numbers stored as strings.
  * 
- * The accumulator and E are initialized to 0. Then, for the number of bits in the numbers,
+ * The accumulator and E are initialized to 0. Then, for the number of bits in the multiplier,
  * the least significant bit of the multiplier and the E are are viewed. If Q[LSB]E is 00 or
  * 11, an arithmetic right shift through AcQE is performed. If Q[LSB]E is 01, the multiplicand
  * is added to Ac, then an arithmetic right shift through AcQE is performed. If Q[LSB]E is 10,
@@ -46,3 +65,14 @@ string subtractBinary(string a, string b);
  * @return A string containing the binary result of multiplying the multiplicand by the multiplier.
 */
 string boothsAlgorithm(string multiplicand, string multiplier);
+
+/**
+ * @brief Performs group of three Booth's algorithm on two binary numbers stored as strings.
+ * 
+ * The accumulator and E are initialized to 0. Then, for half the number of bits in the multiplier,
+ * the formula for group of three booth's algorithm is performed. When the multipliand is addded or subtracted,
+ * a widened version of it is used to account for possible overflow.
+ * 
+ * @return A string containing the binary result of multiplying the multiplicand by the multiplier.
+*/
+string modifiedBoothsAlgorithm(string multiplicand, string multiplier);
