@@ -73,6 +73,7 @@ string leftShift(string a) {
 
 string boothsAlgorithm(string multiplicand, string multiplier) {
     int n = multiplicand.length();
+    int numIterations = 0;
     string Ac(n, '0'); // simulation of accumulator
     char E = '0'; // extended bit for Q
     
@@ -88,6 +89,7 @@ string boothsAlgorithm(string multiplicand, string multiplier) {
      *  10: add the 2s complement of the given value of the multiplier to the accumulator
     */
     for (int i = 0; i < n; i++) {
+        numIterations++;
         if (multiplier.back() == '1' && E == '0') {
             Ac = subtractBinary(Ac, multiplicand);
             numSub++;
@@ -111,7 +113,7 @@ string boothsAlgorithm(string multiplicand, string multiplier) {
 
    cout << "PRODUCT: " << result << endl;
    cout << "TOTAL CALCULATION TIME (MICROSECONDS): " << (elapsed_seconds.count())*1000000 << endl;
-   cout << "TOTAL ITERATIONS: " << n << endl;
+   cout << "TOTAL ITERATIONS: " << numIterations << endl;
    cout << "TOTAL ADDITIONS: " << numAdd << endl;
    cout << "TOTAL SUBTRACTIONS: " << numSub << endl;
    cout << endl;
@@ -138,6 +140,7 @@ string widenNumber(string a) {
 string modifiedBoothsAlgorithm(string multiplicand, string multiplier) {
     string wideMultiplicand = widenNumber(multiplicand);
     int n = multiplier.length();
+    int numIterations = 0;
     string Ac(n, '0'); // simulation of accumulator
     char E = '0'; // extended bit for Q
     
@@ -147,6 +150,7 @@ string modifiedBoothsAlgorithm(string multiplicand, string multiplier) {
     const auto start{chrono::steady_clock::now()};
 
    for (int i = 0; i < n; i+=2) {
+    numIterations++;
     if (multiplier[multiplier.length() - 2] == '0') {
         /*  000 no action shift right twice
             001 add multiplicand shift right twice
@@ -207,7 +211,7 @@ string modifiedBoothsAlgorithm(string multiplicand, string multiplier) {
 
    cout << "PRODUCT: " << result << endl;
    cout << "TOTAL CALCULATION TIME (MICROSECONDS): " << (elapsed_seconds.count())*1000000 << endl;
-   cout << "TOTAL ITERATIONS: " << n << endl;
+   cout << "TOTAL ITERATIONS: " << numIterations << endl;
    cout << "TOTAL ADDITIONS: " << numAdd << endl;
    cout << "TOTAL SUBTRACTIONS: " << numSub << endl;
    cout << endl;
