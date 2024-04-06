@@ -7,9 +7,10 @@ int main() {
 
     string multiplicand, multiplier;
 
-    cout << "Enter multiplicand (binary): ";
-    cin >> multiplicand;
+    while (true) {
     cout << "Enter multiplier (binary): ";
+    cin >> multiplicand;
+    cout << "Enter multiplicand (binary): ";
     cin >> multiplier;
 
     // Ensure both strings are of equal length
@@ -18,8 +19,10 @@ int main() {
     multiplicand = string(length - multiplicand.length(), '0') + multiplicand;
     multiplier = string(length - multiplier.length(), '0') + multiplier;
 
-    boothsAlgorithm(multiplicand, multiplier);
-    modifiedBoothsAlgorithm(multiplicand, multiplier);
+    boothsAlgorithm(multiplier, multiplicand);
+    modifiedBoothsAlgorithm(multiplier, multiplicand);
+
+    }
 
     return 0;
 }

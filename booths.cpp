@@ -71,7 +71,7 @@ string leftShift(string a) {
     return result;
 }
 
-string boothsAlgorithm(string multiplicand, string multiplier) {
+string boothsAlgorithm(string multiplier, string multiplicand) {
     int n = multiplicand.length();
     int numIterations = 0;
     string Ac(n, '0'); // simulation of accumulator
@@ -137,7 +137,7 @@ string widenNumber(string a) {
     return result;
 }
 
-string modifiedBoothsAlgorithm(string multiplicand, string multiplier) {
+string modifiedBoothsAlgorithm(string multiplier, string multiplicand) {
     string wideMultiplicand = widenNumber(multiplicand);
     int n = multiplier.length();
     int numIterations = 0;
@@ -209,7 +209,7 @@ string modifiedBoothsAlgorithm(string multiplicand, string multiplier) {
     const auto end{chrono::steady_clock::now()};
     const chrono::duration<double> elapsed_seconds{end - start};
 
-   cout << "PRODUCT: " << result << endl;
+  cout << "PRODUCT: " << result << endl;
    cout << "TOTAL CALCULATION TIME (MICROSECONDS): " << (elapsed_seconds.count())*1000000 << endl;
    cout << "TOTAL ITERATIONS: " << numIterations << endl;
    cout << "TOTAL ADDITIONS: " << numAdd << endl;

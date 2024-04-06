@@ -64,7 +64,7 @@ string widenNumber(string a);
  * 
  * @return A string containing the binary result of multiplying the multiplicand by the multiplier.
 */
-string boothsAlgorithm(string multiplicand, string multiplier);
+string boothsAlgorithm(string multiplier, string multiplicand);
 
 /**
  * @brief Performs group of three Booth's algorithm on two binary numbers stored as strings.
@@ -75,4 +75,4 @@ string boothsAlgorithm(string multiplicand, string multiplier);
  * 
  * @return A string containing the binary result of multiplying the multiplicand by the multiplier.
 */
-string modifiedBoothsAlgorithm(string multiplicand, string multiplier);
+string modifiedBoothsAlgorithm(string multiplier, string multiplicand);
