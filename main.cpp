@@ -9,9 +9,9 @@ int main() {
 
     while (true) {
     cout << "Enter multiplier (binary): ";
-    cin >> multiplicand;
-    cout << "Enter multiplicand (binary): ";
     cin >> multiplier;
+    cout << "Enter multiplicand (binary): ";
+    cin >> multiplicand;
 
     // Ensure both strings are of equal length
     // This should make results accurate for different lengths
