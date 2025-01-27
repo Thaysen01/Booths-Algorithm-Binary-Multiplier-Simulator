@@ -1,3 +1,5 @@
+### Read the Technical Report for a more detailed analysis of this project. 
+
 This is an efficient simulator and comparison tool for Booth's (Group of Two/Radix-4) and Modified Booth's (Group of Three/Radix-8) algorithms for binary multiplication, implemented in C++. Binary numbers are stored internally as strings as this was found to be the easiest way to work with them. This simulator provides an educational and practical tool to understand and compare these two versions of Booth's Algorithm.
 
 # Usage
